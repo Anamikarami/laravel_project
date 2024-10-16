@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Menu; // Make sure to import the Menu model
 
-
 class MenuController extends Controller
 {
     //
