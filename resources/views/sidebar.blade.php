@@ -11,8 +11,8 @@
   </li>End Dashboard Nav -->
 @foreach($menus as $menu)
   <li class="nav-item">
-    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-      <i class="bi bi-menu-button-wide"></i><span>{{  $menu->name }}</span>
+    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="{{  $menu->url }}">
+      <i class="bi bi-menu-button-wide"></i><span>{{  $menu->menu_name }}</span>
     </a>
   </li><!-- End Components Nav -->
   @endforeach

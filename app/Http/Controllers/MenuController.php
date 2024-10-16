@@ -11,9 +11,9 @@ class MenuController extends Controller
     //
     public function index()
     {
-    //    dd('hii');
+        //  dd('hii');
         // Fetch all menu items from the database
-         $menus = Menu::select('name')->get();
+         $menus = Menu::select('menu_name')->get();
 // dd($menu);
         // Pass the data to the view
          return view('index', compact('menus'));
