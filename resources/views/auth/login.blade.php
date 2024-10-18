@@ -1,3 +1,6 @@
+
+<link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -8,10 +11,6 @@
 
     <form method="POST" action="{{ route('login') }}" class="row g-3 needs-validation" novalidate>
         @csrf
-
-
-
-
 
         <!-- Email Address -->
         <div class="col-12">
@@ -51,7 +50,7 @@
             @endif
 
             <div class="col-12">
-            <x-primary-button class="ms-3 btn-primary w-100">
+            <x-primary-button class=" btn btn-primary w-100">
                 {{ __('Log in') }}
             </x-primary-button>
             </div>

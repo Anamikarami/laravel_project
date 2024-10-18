@@ -1,25 +1,33 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserSettingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController; 
 
 
-// Route::get('/dashboard', function () {
-//     return view('index');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('index');
+    })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+    Route::middleware('auth')->group(function () {
+
+    //for login and register    
+    Route::post('/index', function () {return view('index'); });  
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/', [MenuController::class, 'index'])->name('index');
-    Route::get('/profile/user', [MenuController::class, 'profile'])->name('profile');
+    Route::get('/profile/logout',[ProfileController::class, 'logout']);
 
-   // Route::get('/profile/get/user', [MenuController::class, 'get_user'])->name('getuser');
-    // Route::get('/', function() {
-    //     return view('index');
-    // }); 
+    //for sidebar
+    Route::get('/', [MenuController::class, 'index'])->name('index');
+    
+
+    //for profile page
+    Route::get('/profile/user', [MenuController::class, 'profile'])->name('profile');
+    Route::post('/profile/save',[UserSettingController::class,'usersetting_save'])->name('user.save');
+    //Route::get('/profile/update/{post}',[UserSettingController::class,'usersetting_update'])->name('user.update');
+    
     Route::get('/', [MenuController::class, 'index'])->name('index'); 
 });
 

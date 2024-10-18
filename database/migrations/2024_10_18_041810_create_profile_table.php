@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('profile', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->text('about');
              $table->string('fullName');
              $table->string('company');
@@ -21,9 +22,14 @@ return new class extends Migration
              $table->string('address');
              $table->string('phone');
              $table->string('email');
+             $table->string('profile_image');
              
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
+
+        
     }
 
     /**

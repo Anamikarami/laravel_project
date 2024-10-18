@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+
+
 use Illuminate\Http\Request;
 use App\Models\Menu; // Make sure to import the Menu model
 use App\Models\User; // Make sure to import the Menu model
+use App\Models\UsersSetting; 
+use Illuminate\Support\Facades\Auth;
+ // Make sure to import the Menu model
 use Illuminate\Support\Facades\DB;
 use App\Models\Profile;
 
@@ -19,7 +24,7 @@ class MenuController extends Controller
 
         //  dd('hii');
         // Fetch all menu items from the database
-         $menus = Menu::select('menu_name')->get();
+         $menus = Menu::select('name')->get();
 // dd($menu);
         // Pass the data to the view
          return view('index', compact('menus'));
@@ -28,7 +33,9 @@ class MenuController extends Controller
     public function profile(){
         $menus = Menu::select('name')->get();
         $firstUser =User::select('name')->first();
-        return view('profile', compact('menus','firstUser'));
+        $userSetting = UsersSetting::where('user_id',Auth::id())->first();
+//dd($userSetting);
+        return view('profile', compact('menus','firstUser','userSetting'));
     }
 
     
