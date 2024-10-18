@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -45,38 +44,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-//     public function user()
-// {
-//     return $this->belongsTo(User::class);
-// }
-// public function profile()
-
-// {
-
-//     return $this->hasOne(Profile::class);
-
-// }
-
-    public function setUserSessiondata($id){
-
-        $userSetting =UsersSetting::where('id',$id)->first();
-        $userSetting = $userSetting->toArray();
-        //dump($userSetting);
-    
-       $userDefaultDate = config('comondata.defualt');
-       //dump($userDefaultDate);
-    
-       foreach($userSetting as $uservalue=>$value){
-        //   if(empty($value)){
-        //   $userSetting[$uservalue] = $userDefaultDate[$uservalue];
-        //   }
-    
-        //ternary oprator using
-          $userSetting[$uservalue] = empty($value)?$userDefaultDate[$uservalue]:$value;
-    
-       }
-       //dd($userSetting);
-       return $userSetting;
     }
 }
