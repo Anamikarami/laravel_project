@@ -43,24 +43,37 @@ class UserSettingController extends Controller
      $userSetting->phone = $request->phone;
      $userSetting->email = $request->email;
      
-     if($request->hasfile('profile_image'))
-     {
-      $directory = 'assets/avatar';
-
-      $path =  $request->file('profile_image')->store($directory, 'public');
-      $userSetting->profile_image = Storage::disk('public')->url($path);
-     
+     $imageName = '';
+   //   if ($image = $request->file('profile_image')){
+   //       $imageName = time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
+   //       $image->move('images/profile', $imageName);
+   //   }
       
-     }
-     
-  dd($userSetting);
+     // dd($userSetting);
+
+      
+        $deleteOldImg =  'images/profile/'.$request->image;
+        if ($image = $request->file('profile_image')){
+            if(file_exists($deleteOldImg)){
+                File::delete($deleteOldImg);
+            }
+            $imageName = time().'-'.uniqid().'.'.$image->getClientOriginalExtension();
+            $image->move('images/profile', $imageName);
+        }else{
+            $imageName = $request->image;
+        }
+
+        $userSetting->profile_image = $imageName;
+
      $userSetting->save();
      $user = new User();
      $request->session()->put('default', $user->setUserSessiondata(Auth::id()));
     //  dd($request);
-     return redirect()->route('index');
+   //   return redirect()->route('index');
+     return redirect()->back();
 
  }
+
 
  public function usersetting_update(Request $request){
   dd($request);

@@ -20,22 +20,19 @@ class MenuController extends Controller
     {
     
         // Fetch all menu items from the database
-         $menus = Menu::select('name')->get();
+         // $menus = Menu::select('name')->get();
 
-        //  dd('hii');
-        // Fetch all menu items from the database
-         $menus = Menu::select('name')->get();
-// dd($menu);
+        
         // Pass the data to the view
-         return view('index', compact('menus'));
+         return view('index');
     }
 
     public function profile(){
-        $menus = Menu::select('name')->get();
-        $firstUser =User::select('name')->first();
-        $userSetting = UsersSetting::where('user_id',Auth::id())->first();
-//dd($userSetting);
-        return view('profile', compact('menus','firstUser','userSetting'));
+//         $menus = Menu::select('name')->get();
+//         $firstUser =User::select('name')->first();
+//         $userSetting = UsersSetting::where('user_id',Auth::id())->first();
+// //dd($userSetting);
+        return view('profile');
     }
 
     

@@ -142,19 +142,21 @@
 
           </ul>End Notification Dropdown Items -->
 
-        
+    {{-- {{dd(Auth::user());}} --}}
+
 
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{(!empty(Auth::user()->profile_photo))?asset('/assets/avatar/'.$Auth::user()->profile_photo.''):asset('assets/avtar/avtar.jpg') }}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+            <img src="{{(!empty($userSetting->profile_image))?asset('images/profile/'.$userSetting->profile_image):asset('images/profile/avtar.jpg') }}" alt="Profile" class="rounded-circle">
+            
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ $firstUser->name }}</span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-            <h6>{{ Auth::user()->name }} </h6>
-              <span>{{ Auth::user()->email }}</span>
+            <h6>{{ $firstUser->name }} </h6>
+              <span>{{ $firstUser->email }}</span>
               
             </li>
             <li>

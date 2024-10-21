@@ -22,9 +22,9 @@
       <div class="card">
         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
        
-          <img src="{{(!empty($userSetting->profile_photo))?asset('/assets/avatar/'.$userSetting->profile_photo.''):asset('assets/avtar/avtar.jpg') }}" alt="Profile" class="rounded-circle">
-          <h2>{{ Auth::user()->name }}</h2> 
-          <h3>{{ Auth::user()->email }}</h3>
+          <img src="{{(!empty($userSetting->profile_image))?asset('images/profile/'.$userSetting->profile_image):asset('images/profile/avtar.jpg') }}" alt="Profile" class="rounded-circle">
+          <h2>{{ $firstUser->name }}</h2> 
+          <h3>{{ $firstUser->email }}</h3>
        
         </div>
       </div>
@@ -103,17 +103,12 @@
               <!-- Profile Edit Form -->
               <form method="POST" action="{{ Route('user.save')}}" enctype="multipart/form-data">
                 @csrf
-              
+              {{-- {{dd($userSetting)}} --}}
                 <div class="row mb-3">
                   <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                   <div class="col-md-8 col-lg-9">
-                    {{-- <img src="{{ (!empty($userSetting->profile_photo))?asset('/assets/avatar/'.$userSetting->profile_photo.''):asset('assets/avtar/avtar.jpg') }}" alt="Profile" class="rounded-circle"> --}}
-                    <img src="{{ asset('assets/avtar/avtar.jpg') }}" alt="Profile"></br>
+                    <img src =' {{(!empty($userSetting->profile_image))?asset('images/profile/'.$userSetting->profile_image):asset('images/profile/avtar.jpg') }}' alt='Profile'></br>
                     <input type="file" name="profile_image" class="form-control">
-                    <div class="pt-2">
-                      <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                      <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                    </div>
                   </div>
                 </div>
 
@@ -172,7 +167,7 @@
                     <input name="email" type="email" class="form-control" id="Email" value="{{ $userSetting->email   ?? ''}}">
                   </div>
                 </div>
-                <input type="hidden" name="id" value="{{$userSetting->id ?? ''}}">
+                <input type="hidden" name="id" value="{{$userSetting->user_id ?? ''}}">
                 <button type="submit" class="btn btn-primary">Save Changes</button>
 
                 {{-- <div class="text-center">

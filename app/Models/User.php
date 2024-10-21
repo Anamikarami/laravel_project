@@ -60,8 +60,12 @@ class User extends Authenticatable
 
     public function setUserSessiondata($id){
 
-        $userSetting =UsersSetting::where('id',$id)->first();
-        $userSetting = $userSetting->toArray();
+        // $userSetting =UsersSetting::where('id',$id)->first();
+        // $userSetting = $userSetting->toArray();
+
+
+        $userSetting = User::find($id);
+        return $userSetting ? $userSetting->toArray() : [];
         //dump($userSetting);
     
        $userDefaultDate = config('comondata.defualt');
