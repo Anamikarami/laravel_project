@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MenuController; 
 
 
-    Route::get('/dashboard', function () {
+    Route::get('/', function () {
         return view('index');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -19,16 +19,20 @@ use App\Http\Controllers\MenuController;
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/profile/logout',[ProfileController::class, 'logout']);
 
+
     //for sidebar
-    Route::get('/', [MenuController::class, 'index'])->name('index');
+    // for siderbar and header using service provider 
+    // Route::get('/', [MenuController::class, 'index'])->name('index');
     
 
     //for profile page
     Route::get('/profile/user', [MenuController::class, 'profile'])->name('profile');
     Route::post('/profile/save',[UserSettingController::class,'usersetting_save'])->name('user.save');
-    //Route::get('/profile/update/{post}',[UserSettingController::class,'usersetting_update'])->name('user.update');
+    Route::put('/password/update', [UserSettingController::class, 'updatePassword'])->name('password.update');
     
-    Route::get('/', [MenuController::class, 'index'])->name('index'); 
+
+
+    //Route::get('/', [MenuController::class, 'index'])->name('index'); 
 });
 
 require __DIR__.'/auth.php';
